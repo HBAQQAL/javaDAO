@@ -70,15 +70,15 @@ public class clientDAO  implements DAO<Client , Integer>{
     }
 
     @Override
-    public void updateByID(Integer id) {
+    public void updateByID(Integer id, Client entity) {
         try {
             Connection connection = Connexion.getConnection();
             String query = "UPDATE client SET nom = ?, email = ?, phone = ?, address = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, "name");
-            preparedStatement.setString(2, "email");
-            preparedStatement.setString(3, "phone");
-            preparedStatement.setString(4, "address");
+            preparedStatement.setString(1, entity.getName());
+            preparedStatement.setString(2, entity.getEmail());
+            preparedStatement.setString(3, entity.getPhone());
+            preparedStatement.setString(4, entity.getAddress());
             preparedStatement.setInt(5, id);
             preparedStatement.executeUpdate();
             System.out.println("Client modifié avec succès");

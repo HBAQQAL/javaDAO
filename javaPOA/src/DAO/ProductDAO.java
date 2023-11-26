@@ -74,15 +74,15 @@ public class ProductDAO implements DAO<Product , Integer> {
     }
 
     @Override
-    public void updateByID(Integer id) {
+    public void updateByID(Integer id , Product entity) {
         try {
             Connection connection = Connexion.getConnection();
             String query = "UPDATE product SET name = ?, description = ?, price = ?, stock = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, "name");
-            preparedStatement.setString(2, "description");
-            preparedStatement.setDouble(3, 0.0);
-            preparedStatement.setInt(4, 0);
+            preparedStatement.setString(1, entity.getName());
+            preparedStatement.setString(2, entity.getDescription());
+            preparedStatement.setDouble(3, entity.getPrice());
+            preparedStatement.setInt(4, entity.getStock());
             preparedStatement.setInt(5, id);
             preparedStatement.executeUpdate();
             System.out.println("Product modifié avec succès");
